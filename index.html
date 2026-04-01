@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Alert</title>
+<style>
+  body {
+    margin: 0;
+    background: black;
+    color: #00ff00;
+    font-family: monospace;
+    overflow: hidden;
+  }
+  #terminal {
+    padding: 30px;
+    font-size: 1.2rem;
+    white-space: pre-line;
+  }
+  .blink {
+    animation: blink 1s step-start infinite;
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+  #final {
+    display: none;
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    color: red;
+  }
+</style>
+</head>
+<body>
+<div id="terminal"></div>
+<div id="final">😂 Relax — you got pranked.</div>
+
+<script>
+const lines = [
+  'Connecting to remote host...',
+  'Bypassing firewall...',
+  'Access granted.',
+  'Copying employee files...',
+  'Syncing inbox...',
+  'Camera access enabled...',
+  'Injecting payload...',
+  'Trace disabled.',
+  'Uploading confidential data...'
+];
+
+const terminal = document.getElementById('terminal');
+let i = 0;
+
+function typeLine() {
+  if (i < lines.length) {
+    terminal.innerHTML += lines[i] + '\n';
+    i++;
+    setTimeout(typeLine, 900);
+  } else {
+    terminal.innerHTML += '\n⚠ WARNING: DEVICE COMPROMISED ⚠\n';
+    terminal.innerHTML += '<span class="blink">Finalizing...</span>';
+    setTimeout(() => {
+      document.getElementById('final').style.display = 'block';
+    }, 3000);
+  }
+}
+
+typeLine();
+
+// fake random background numbers
+setInterval(() => {
+  const rand = Math.random().toString(36).substring(2, 12);
+  terminal.innerHTML += '\n' + rand;
+  window.scrollTo(0, document.body.scrollHeight);
+}, 700);
+</script>
+</body>
+</html>
