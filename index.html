@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>System Alert</title>
+<title>System Breach</title>
 <style>
   body {
     margin: 0;
@@ -17,6 +17,15 @@
     font-size: 1.2rem;
     white-space: pre-line;
   }
+  #target {
+    display: none;
+    position: absolute;
+    top: 15%;
+    right: 8%;
+    max-width: 280px;
+    border: 2px solid red;
+    filter: grayscale(100%);
+  }
   .blink {
     animation: blink 1s step-start infinite;
   }
@@ -26,7 +35,7 @@
   #final {
     display: none;
     position: absolute;
-    top: 40%;
+    top: 70%;
     width: 100%;
     text-align: center;
     font-size: 2rem;
@@ -36,19 +45,18 @@
 </head>
 <body>
 <div id="terminal"></div>
+<img id="target" src="target.jpg">
 <div id="final">😂 Relax — you got pranked.</div>
 
 <script>
 const lines = [
   'Connecting to remote host...',
-  'Bypassing firewall...',
-  'Access granted.',
-  'Copying employee files...',
-  'Syncing inbox...',
+  'Identity trace started...',
+  'TARGET IDENTIFIED',
+  'Extracting employee records...',
   'Camera access enabled...',
-  'Injecting payload...',
-  'Trace disabled.',
-  'Uploading confidential data...'
+  'Network override complete...',
+  'Uploading confidential files...'
 ];
 
 const terminal = document.getElementById('terminal');
@@ -57,25 +65,25 @@ let i = 0;
 function typeLine() {
   if (i < lines.length) {
     terminal.innerHTML += lines[i] + '\n';
+
+    if (i === 2) {
+      document.getElementById('target').style.display = 'block';
+    }
+
     i++;
     setTimeout(typeLine, 900);
   } else {
-    terminal.innerHTML += '\n⚠ WARNING: DEVICE COMPROMISED ⚠\n';
-    terminal.innerHTML += '<span class="blink">Finalizing...</span>';
+    terminal.innerHTML += '\n⚠ DEVICE COMPROMISED ⚠\n';
+    terminal.innerHTML += '<span class="blink">Finalizing breach...</span>';
+
     setTimeout(() => {
       document.getElementById('final').style.display = 'block';
-    }, 3000);
+    }, 2500);
   }
 }
 
 typeLine();
-
-// fake random background numbers
-setInterval(() => {
-  const rand = Math.random().toString(36).substring(2, 12);
-  terminal.innerHTML += '\n' + rand;
-  window.scrollTo(0, document.body.scrollHeight);
-}, 700);
 </script>
 </body>
 </html>
+
